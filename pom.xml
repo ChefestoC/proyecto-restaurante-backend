@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.chornapi.proyecto</groupId>
 	<artifactId>restauranteback</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0.1-SNAPSHOT</version>
 	<name>restauranteback</name>
 	<description>Proyecto para Administrar un restaurante</description>
 	<url/>
