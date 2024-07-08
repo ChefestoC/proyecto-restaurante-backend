@@ -23,7 +23,7 @@ public class ProductoInsumoDomain {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_insumo")
-    private InsumoDomain insumo;
+    private SupplieDomain insumo;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_producto")

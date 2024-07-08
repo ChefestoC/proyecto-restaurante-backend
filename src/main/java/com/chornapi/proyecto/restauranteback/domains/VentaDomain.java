@@ -29,7 +29,7 @@ public class VentaDomain {
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_mesa")
-    private MesaDomain mesa;
+    private TableDomain mesa;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "id_dia")
