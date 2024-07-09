@@ -33,7 +33,7 @@ public class TableController {
     }
 
     @PatchMapping(value = "/status/{id}")
-    public ResponseEntity<Void> patchStatusMe(short id,@RequestParam Boolean status){
+    public ResponseEntity<Void> patchStatusMe(@PathVariable String id,@RequestParam Boolean status){
         tableService.updateStatussToTable(id,status);
         return new ResponseEntity<>(HttpStatus.OK);
     }

@@ -8,7 +8,7 @@ public interface TableService {
 
     List<TableDto> getTablesActives();
 
-    void updateStatussToTable(short id, boolean status);
+    void updateStatussToTable(String id, boolean status);
 
     TableDto newTable();
 }

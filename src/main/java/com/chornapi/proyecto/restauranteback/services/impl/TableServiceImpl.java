@@ -33,9 +33,9 @@ public class TableServiceImpl implements TableService {
 
 
     @Override
-    public void updateStatussToTable(short id, boolean status){
+    public void updateStatussToTable(String id, boolean status){
 
-        Optional<TableDomain> optional = tableRepository.findById(id);
+        Optional<TableDomain> optional = tableRepository.findById(Short.parseShort(id));
 
         if(optional.isEmpty()){
             log.error("Mesa no encontrada.");
