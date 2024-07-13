@@ -23,7 +23,7 @@ public class TableController {
     TableService tableService;
 
     @PostMapping(value = "/new")
-    public ResponseEntity<TableDto> newTable(@RequestBody NewSupplieRequest newSupplieRequest){
+    public ResponseEntity<TableDto> newTable(){
         return new ResponseEntity<>(tableService.newTable(), HttpStatus.CREATED);
     }
 
