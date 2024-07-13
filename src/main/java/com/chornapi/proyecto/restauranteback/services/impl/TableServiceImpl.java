@@ -25,8 +25,11 @@ public class TableServiceImpl implements TableService {
     @Override
     public TableDto newTable(){
         List<TableDomain> allTables = tableRepository.findAll();
-        short idMax=allTables.stream()
+        short idMax=0;
+        if(allTables.size()!=0)
+            idMax=allTables.stream()
                 .max(Comparator.comparing(TableDomain::getId)).get().getId();
+
         idMax = (short) (idMax + 1);
         TableDomain tableSaved = tableRepository.save(TableDomain
                 .builder()
