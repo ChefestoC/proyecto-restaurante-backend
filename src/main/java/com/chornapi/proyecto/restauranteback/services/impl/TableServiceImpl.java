@@ -23,20 +23,37 @@ public class TableServiceImpl implements TableService {
     private final TableMapper tableMapper;
 
     @Override
-    public List<TableDto> getTablesActives() {
-
-        List<TableDomain> mesasAll = tableRepository.findByStatusIs(true);
-
-        return tableMapper.mesaDomainListToMesaDtoList(mesasAll);
-
+    public TableDto newTable(){
+        List<TableDomain> allTables = tableRepository.findAll();
+        short idMax=allTables.stream()
+                .max(Comparator.comparing(TableDomain::getId)).get().getId();
+        idMax = (short) (idMax + 1);
+        TableDomain tableSaved = tableRepository.save(TableDomain
+                .builder()
+                .id(idMax)
+                .status(true)
+                .registerDate(new Date())
+                .build());
+        return tableMapper.mesaDomainToMesaDto(tableSaved);
     }
+    @Override
+    public List<TableDto> getAllTables() {
+        List<TableDomain> mesasAll = tableRepository.findAll();
+        return tableMapper.mesaDomainListToMesaDtoList(mesasAll);
+    }
+    @Override
+    public List<TableDto> getTablesActives() {
+        List<TableDomain> mesasAll = tableRepository.findByStatusIs(true);
+        return tableMapper.mesaDomainListToMesaDtoList(mesasAll);
+    }
+
+
+
 
 
     @Override
     public void updateStatussToTable(String id, boolean status){
-
         Optional<TableDomain> optional = tableRepository.findById(Short.parseShort(id));
-
         if(optional.isEmpty()){
             log.error("Mesa no encontrada.");
             return;
@@ -46,21 +63,15 @@ public class TableServiceImpl implements TableService {
         tableRepository.save(table);
     }
 
+
     @Override
-    public TableDto newTable(){
-        List<TableDomain> allTables = tableRepository.findAll();
-
-        short idMax=allTables.stream()
-                .max(Comparator.comparing(TableDomain::getId)).get().getId();
-
-        idMax = (short) (idMax + 1);
-        TableDomain tableSaved = tableRepository.save(TableDomain
-                .builder()
-                    .id(idMax)
-                    .status(true)
-                    .registerDate(new Date())
-                .build());
-
-        return tableMapper.mesaDomainToMesaDto(tableSaved);
+    public void deleteTable(String id){
+        Optional<TableDomain> optional = tableRepository.findById(Short.parseShort(id));
+        if(optional.isEmpty()){
+            log.error("Mesa no encontrada.");
+            return;
+        }
+        TableDomain table = optional.get();
+        tableRepository.delete(table);
     }
 }

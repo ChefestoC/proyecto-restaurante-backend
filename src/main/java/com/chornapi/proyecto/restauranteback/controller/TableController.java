@@ -27,6 +27,10 @@ public class TableController {
         return new ResponseEntity<>(tableService.newTable(), HttpStatus.CREATED);
     }
 
+    @GetMapping(value = "/all")
+    public ResponseEntity<List<TableDto>> getAllTables(){
+        return new ResponseEntity<>(tableService.getAllTables(), HttpStatus.OK);
+    }
     @GetMapping(value = "/actives")
     public ResponseEntity<List<TableDto>> getTablesActive(){
         return new ResponseEntity<>(tableService.getTablesActives(), HttpStatus.OK);
@@ -35,6 +39,12 @@ public class TableController {
     @PatchMapping(value = "/status/{id}")
     public ResponseEntity<Void> patchStatusMe(@PathVariable String id,@RequestParam Boolean status){
         tableService.updateStatussToTable(id,status);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> patchStatusMe(@PathVariable String id){
+        tableService.deleteTable(id);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 }

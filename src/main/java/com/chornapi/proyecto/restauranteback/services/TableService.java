@@ -6,9 +6,15 @@ import java.util.List;
 
 public interface TableService {
 
+    TableDto newTable();
+
+    List<TableDto> getAllTables();
+
     List<TableDto> getTablesActives();
 
     void updateStatussToTable(String id, boolean status);
 
-    TableDto newTable();
+    void deleteTable(String id);
+
+
 }
